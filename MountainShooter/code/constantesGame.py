@@ -1,4 +1,6 @@
 # Cor do texto (Nome do game)
+import pygame
+
 COLOR_ORANGE = (255, 164, 0)
 # Cor do texto (Nome da opção de menu)
 COLOR_WHITE = (255, 255, 255)
@@ -20,5 +22,19 @@ ENTITY_SPEED = {'level1bg0': 0,
                 'level1bg3': 3,
                 'level1bg4': 4,
                 'level1bg5': 5,
-                'level1bg6': 6
-                 }
+                'level1bg6': 6,
+                'player1': 3,
+                'player2': 3,
+                'enemy1': 2,
+                'enemy2': 1}
+# Criar os movimentos do player1 e player2
+PLAYER_KEY_UP = {'player1': pygame.K_UP,
+                 'player2': pygame.K_w}
+PLAYER_KEY_DOWN = {'player1': pygame.K_DOWN,
+                   'player2': pygame.K_s}
+PLAYER_KEY_LEFT = {'player1': pygame.K_LEFT,
+                   'player2': pygame.K_a}
+PLAYER_KEY_RIGHT = {'player1': pygame.K_RIGHT,
+                    'player2': pygame.K_d}
+
+EVENT_ENEMY = pygame.USEREVENT + 1
