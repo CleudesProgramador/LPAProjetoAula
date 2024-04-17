@@ -24,9 +24,39 @@ ENTITY_SPEED = {'level1bg0': 0,
                 'level1bg5': 5,
                 'level1bg6': 6,
                 'player1': 3,
+                'player1Shot': 2,
                 'player2': 3,
-                'enemy1': 2,
-                'enemy2': 1}
+                'player2Shot': 2,
+                'enemy1': 1,
+                'enemy1Shot': 5,
+                'enemy2': 1,
+                'enemy2Shot': 3,
+                }
+
+# Criar as vidas das Entidades do jogo.
+ENTITY_HEALTH = {'level1bg0': 999,
+                 'level1bg1': 999,
+                 'level1bg2': 999,
+                 'level1bg3': 999,
+                 'level1bg4': 999,
+                 'level1bg5': 999,
+                 'level1bg6': 999,
+                 'player1': 300,
+                 'player1Shot': 1,
+                 'player2': 300,
+                 'player2Shot': 1,
+                 'enemy1': 200,
+                 'enemy1Shot': 1,
+                 'enemy2': 200,
+                 'enemy2Shot': 1,
+                 }
+
+ENTITY_SHOT_DELAY = {'player1': 10,
+                     'player2': 5,
+                     'enemy1': 80,
+                     'enemy2': 160,
+                     }
+
 # Criar os movimentos do player1 e player2
 PLAYER_KEY_UP = {'player1': pygame.K_UP,
                  'player2': pygame.K_w}
@@ -36,5 +66,8 @@ PLAYER_KEY_LEFT = {'player1': pygame.K_LEFT,
                    'player2': pygame.K_a}
 PLAYER_KEY_RIGHT = {'player1': pygame.K_RIGHT,
                     'player2': pygame.K_d}
+PLAYER_KEY_SHOOT = {'player1': pygame.K_l,
+                    'player2': pygame.K_LCTRL,
+                    }
 
 EVENT_ENEMY = pygame.USEREVENT + 1

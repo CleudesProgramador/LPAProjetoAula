@@ -5,8 +5,11 @@ import pygame.display
 from pygame import Surface, Rect
 from pygame.font import Font
 
+from code.Enemy import Enemy
 from code.Entity import Entity
 from code.EntityFactory import EntityFactory
+from code.EntityMediator import EntityMediator
+from code.Player import Player
 from code.constantesGame import COLOR_WHITE, SCREEN_HEIGHT, MENU_OPTION, EVENT_ENEMY
 
 
@@ -30,11 +33,24 @@ class Level:
         clock = pygame.time.Clock()
         while True:
             clock.tick(60)
+            # Desenhar na tela
             for ent in self.entity_list:
                 self.screen.blit(source=ent.surface, dest=ent.rect)
-                self.level_text(14, f'fps: {clock.get_fps():.0f}', COLOR_WHITE, (0 + 10, SCREEN_HEIGHT - 20))
-                print(f'fps: {clock.get_fps():.0f}')
                 ent.move()
+                if isinstance(ent, (Player, Enemy)):
+                    shoot = ent.shoot()
+                    if shoot is not None:
+                        self.entity_list.append(shoot)
+            # Texto a ser printado na tela
+            self.level_text(14, f'fps: {clock.get_fps():.0f}', COLOR_WHITE, (0 + 10, SCREEN_HEIGHT - 20))
+            print(f'fps: {clock.get_fps():.0f}')
+            self.level_text(14, f'entidades: {len(self.entity_list)}', COLOR_WHITE, (5, 5))
+            # Atualizar tela
+            pygame.display.flip()
+            # Verificar relacionamentos de entidades
+            EntityMediator.verify_collision(entity_list=self.entity_list)
+            EntityMediator.verify_health(entity_list=self.entity_list)
+            # Conferir eventos
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     pygame.quit()
@@ -42,7 +58,6 @@ class Level:
                 if event.type == EVENT_ENEMY:
                     choice = random.choice(('enemy1', 'enemy2'))
                     self.entity_list.append(EntityFactory.get_entity(choice))
-            pygame.display.flip()
         pass
 
     def level_text(self, text_size, text: str, text_color: tuple, text_position: tuple):
